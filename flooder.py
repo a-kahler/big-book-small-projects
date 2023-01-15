@@ -85,3 +85,23 @@ entire board the same color/shape.''')
             break
 
     
+def getNewBoard():
+    """Return a dictionary of a new Flood It board."""
+
+    # Keys are (x, y) tuples, values are the tile at that position.
+    board = {}
+
+    # Create random colors for the board.
+    for x in range(BOARD_WIDTH):
+        for y in range(BOARD_HEIGHT):
+            board[(x, y)] = random.choice(TILE_TYPES)
+
+    # Make several tiles the same as their neighbor. This creates groups
+    # of the same color/shape.
+    for i in range(BOARD_WIDTH * BOARD_HEIGHT):
+        x = random.randint(0, BOARD_WIDTH - 2)
+        y = random.randint(0, BOARD_HEIGHT - 1)
+        board[(x + 1, y)] = board[(x, y)]
+    return board
+
+
