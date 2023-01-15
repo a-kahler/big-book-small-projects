@@ -42,6 +42,46 @@ TILE_TYPES = (0, 1, 2, 3, 4, 5)
 COLORS_MAP = {0: 'red', 1: 'green', 2:'blue',
                 3:'yellow', 4: 'cyan', 5: 'purple'}
 COLOR_MODE = 'color mode'
-SHAPES_MAP = {0: HEART, 1: TRIANGLE, 2: DIAMOND
+SHAPES_MAP = {0: HEART, 1: TRIANGLE, 2: DIAMOND,
               3: BALL, 4: CLUB, 5: SPADE}
 SHAPE_MODE = 'shape mode'
+
+
+def main():
+    bext.bg('black')
+    bext.fg('white')
+    bext.clear()
+    print('''Flooder, by Austii KAY
+
+Set the upper left color/shape, which fills in all the
+adjacent squares of that color/shape. Try to make the
+entire board the same color/shape.''')
+
+    print('Do you want to play in colorblind mode? Y/N')
+    response = input('> ')
+    if response.upper().startswith('Y'):
+        displayMode = SHAPE_MODE
+    else:
+        displayMode = COLOR_MODE
+    
+    gameBoard = getNewBoard()
+    movesLeft = MOVES_PER_GAME
+
+    while True: # Main game loop.
+        displayBoard(gameBoard, displayMode)
+
+        print('Moves left:', movesLeft)
+        playerMove = askForPlayerMove(displayMode)
+        changeTile(playerMove, gameBoard, 0, 0)
+        movesLeft -= 1
+
+        if hasWon(gameBoard):
+            displayBoard(gameBoard, displayMode)
+            print('You have won!')
+            break
+        elif movesLeft == 0:
+            displayBoard(gameBoard, displayMode)
+            print('You have run out of moves!')
+            break
+
+    
