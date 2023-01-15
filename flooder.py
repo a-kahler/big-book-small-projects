@@ -205,3 +205,17 @@ def changeTile(tileType, board, x, y, charToChange=None):
         changeTile(tileType, board, x, y + 1, charToChange)
 
 
+def hasWon(board):
+    """Return True if the entire board is one color/shape."""
+    tile = board[(0, 0)]
+
+    for x in range(BOARD_WIDTH):
+        for y in range(BOARD_HEIGHT):
+            if board[(x, y)] != tile:
+                return False
+    return True
+
+
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    main()
