@@ -181,3 +181,27 @@ def askForPlayerMove(displayMode):
                      'B': 3, 'C': 4, 'S': 5}[response]
 
 
+def changeTile(tileType, board, x, y, charToChange=None):
+    """Change the color/shape of a tile using the recursive flood fill
+    algorithm."""
+    if x == 0 and y == 0:
+        charToChange = board[(x, y)]
+        if tileType == charToChange:
+            return # Base Case: Already is the same tile.
+    
+    board[(x, y)] = tileType
+
+    if x > 0 and board[(x - 1, y)] == charToChange:
+        # Recursive Case: Change the left neighbor's tile:
+        changeTile(tileType, board, x - 1, y, charToChange)
+    if y > 0 and board[(x, y - 1)] == charToChange:
+        # Recursive Case: Change the top neighbor's tile:
+        changeTile(tileType, board, x, y - 1, charToChange)
+    if x < BOARD_WIDTH - 1 and board[(x + 1, y)] == charToChange:
+        # Recursive Case: Change the right neighbor's tile:
+        changeTile(tileType, board, x + 1, y, charToChange)
+    if y < BOARD_HEIGHT - 1 and board[(x, y + 1)] == charToChange:
+        # Recursive case: Change the bottom neighbor's tile:
+        changeTile(tileType, board, x, y + 1, charToChange)
+
+
