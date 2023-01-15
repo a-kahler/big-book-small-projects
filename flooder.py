@@ -1,7 +1,7 @@
 """Flooder, by Austii KAY
 A colorful game where you try to fill the board with a single color. Has
 a mode for colorblind players.
-Inspired by the "Flood Itl" game.
+Inspired by the "Flood It" game.
 
 """
 
@@ -131,5 +131,53 @@ def displayBoard(board, displayMode):
         print(UPDOWN) # Rows end with a white vertical line.
     # Display the bottom edge of the board:
     print(UPRIGHT + (LEFTRIGHT * BOARD_WIDTH) + UPLEFT)
+
+
+def askForPlayerMove(displayMode):
+    """Let the player select a color to paint the upper left tile."""
+    while True:
+        bext.fg('white')
+        print('Choose one of ', end='')
+
+        if displayMode == COLOR_MODE:
+            bext.fg('red')
+            print('(R)ed ', end='')
+            bext.fg('green')
+            print('(G)reen ', end='')
+            bext.fg('blue')
+            print('(B)lue ', end='')
+            bext.fg('yellow')
+            print('(Y)ellow ', end='')
+            bext.fg('cyan')
+            print('(C)yan ', end='')
+            bext.fg('purple')
+            print('(P)urple ', end='')
+        elif displayMode == SHAPE_MODE:
+            bext.fg('red')
+            print('(H)eart, ', end='')
+            bext.fg('green')
+            print('(T)riangle, ', end='')
+            bext.fg('blue')
+            print('(D)iamond, ', end='')
+            bext.fg('yellow')
+            print('(B)all, ', end='')
+            bext.fg('cyan')
+            print('(C)lub, ', end='')
+            bext.fg('purple')
+            print('(S)pade, ', end='')
+        bext.fg('white')
+        print('or QUIT:')
+        response = input('> ').upper()
+        if response == 'QUIT':
+            print('Thanks for playing')
+            sys.exit()
+        if displayMode == COLOR_MODE and response in tuple('RGBYCP'):
+            # Return a tile type number based on the response:
+            return {'R': 0, 'G': 1, 'B': 2,
+                     'Y': 3, 'C': 4, 'P': 5}[response]
+        if displayMode == SHAPE_MODE and response in tuple('HTDBCS'):
+            # Return a tile type number based on the response:
+            return {'H': 0, 'T': 1, 'D': 2,
+                     'B': 3, 'C': 4, 'S': 5}[response]
 
 
