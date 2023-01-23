@@ -107,4 +107,9 @@ def displayForest(forest):
     print('Press Ctrl-C to quit.')
 
 
-    
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
