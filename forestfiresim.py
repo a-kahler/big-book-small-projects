@@ -87,3 +87,24 @@ def createNewForest():
     return forest
 
 
+def displayForest(forest):
+    """Display the forest data structure on the screen."""
+    bext.goto(0, 0)
+    for y in range(forest['height']):
+        for x in range(forest['width']):
+            if forest[(x, y)] == TREE:
+                bext.fg('green')
+                print(TREE, end='')
+            elif forest[(x, y)] == FIRE:
+                bext.fg('red')
+                print(FIRE, end='')
+            elif forest[(x, y)] == EMPTY:
+                print(EMPTY, end='')
+        print()
+    bext.fg('reset') # Use the default font color.
+    print('Grow chance: {}%  '.format(GROW_CHANCE * 100), end='')
+    print('Lightning chance: {}%  '.format(FIRE_CHANCE * 100), end='')
+    print('Press Ctrl-C to quit.')
+
+
+    
