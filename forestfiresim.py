@@ -66,7 +66,7 @@ def main():
                             if forest.get((x + ix, y + iy)) == TREE:
                                 nextForest[(x + ix, y + iy)] = FIRE
                     # The tree has burned down now, so erase it:
-                    nextForest[(x, y)] = forest[(x, y)]
+                    nextForest[(x, y)] = EMPTY
                 else:
                     # Just copy the existing object:
                     nextForest[(x, y)] = forest[(x, y)]
