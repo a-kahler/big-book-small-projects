@@ -169,3 +169,8 @@ def isWinner(playerTile, board):
             if tile1 == tile2 == tile3 == tile4 == playerTile:
                 return True
     return False
+
+
+# If the program is run (instead of imported), run the game:
+if __name__ == '__main__':
+    main()
