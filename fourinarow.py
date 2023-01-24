@@ -126,3 +126,46 @@ def isFull(board):
     return True # All spaces are full. 
 
 
+def isWinner(playerTile, board):
+    """Returns True if 'playerTile' has four tiles in a row on 'board',
+    otherwise returns False."""
+
+    # Go through the entire board, checking for four-in-a-row:
+    for columnIndex in range(BOARD_WIDTH - 3):
+        for rowIndex in range(BOARD_HEIGHT):
+            # Check for horizontal four-in-a-row going right:
+            tile1 = board[(columnIndex, rowIndex)]
+            tile2 = board[(columnIndex + 1, rowIndex)]
+            tile3 = board[(columnIndex + 2, rowIndex)]
+            tile4 = board[(columnIndex + 3, rowIndex)]
+            if tile1 == tile2 == tile3 == tile4 == playerTile:
+                return True
+    
+    for columnIndex in range(BOARD_WIDTH):
+        for rowIndex in range(BOARD_HEIGHT - 3):
+            # Check for vertical four-in-a-row going down:
+            tile1 = board[(columnIndex, rowIndex)]
+            tile2 = board[(columnIndex, rowIndex + 1)]
+            tile3 = board[(columnIndex, rowIndex + 2)]
+            tile4 = board[(columnIndex, rowIndex + 3)]
+            if tile1 == tile2 == tile3 == tile4 == playerTile:
+                return True
+    
+    for columnIndex in range(BOARD_WIDTH - 3):
+        for rowIndex in range(BOARD_HEIGHT - 3):
+            # Check for four-in-a-row going right-down diagonal:
+            tile1 = board[(columnIndex, rowIndex)]
+            tile2 = board[(columnIndex + 1, rowIndex + 1)]
+            tile3 = board[(columnIndex + 2, rowIndex + 2)]
+            tile4 = board[(columnIndex + 3, rowIndex + 3)]
+            if tile1 == tile2 == tile3 == tile4 == playerTile:
+                return True
+            
+            # Check for four-in-a-row going left-down diagonal:
+            tile1 = board[(columnIndex + 3, rowIndex)]
+            tile2 = board[(columnIndex + 2, rowIndex + 1)]
+            tile3 = board[(columnIndex + 1, rowIndex + 2)]
+            tile4 = board[(columnIndex, rowIndex + 3)]
+            if tile1 == tile2 == tile3 == tile4 == playerTile:
+                return True
+    return False
