@@ -51,3 +51,15 @@ to make four in a row horizontally, vertically, or diagonally.
             playerTurn = PLAYER_X
 
 
+def getNewBoard():
+    """Returns a dictionary that represents a Four in a Row board.
+    
+    The keys are (columnIndex, rowIndex) tuples of two integers, and the
+    values are one of the 'X', 'O', or '.' (empty space) strings. """
+    board = {}
+    for columnIndex in range(BOARD_WIDTH):
+        for rowIndex in range(BOARD_HEIGHT):
+            board[(columnIndex, rowIndex)] = EMPTY_SPACE
+    return board
+
+
