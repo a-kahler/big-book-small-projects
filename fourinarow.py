@@ -116,3 +116,13 @@ def askForPlayerMove(playerTile, board):
                 return (columnIndex, rowIndex)
 
 
+def isFull(board):
+    """Returns True if the 'board' has no empty spaces, otherwise
+    returns False."""
+    for rowIndex in range(BOARD_HEIGHT):
+        for columnIndex in range(BOARD_WIDTH):
+            if board[(columnIndex, rowIndex)] == EMPTY_SPACE:
+                return False # Found an empty space, so return False.
+    return True # All spaces are full. 
+
+
