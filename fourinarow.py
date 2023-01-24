@@ -87,3 +87,32 @@ def displayBoard(board):
     +-------+""".format(*tileChars))
 
 
+def askForPlayerMove(playerTile, board):
+    """Let a player select a column on the board to drop a tile into.
+    
+    Returns a tuple of the (column, row) that the tile falls into."""
+    while True: # Keep asking player until they enter a valid move.
+        print('Player {}, enter a column or QUIT:'.format(playerTile))
+        response = input('> ').upper().strip()
+
+        if response == 'QUIT':
+            print('Thanks for playing!')
+            sys.exit()
+
+        if response not in COLUMN_LABELS:
+            print('Enter a number for 1 to {}.'.format(BOARD_WIDTH))
+            continue # Ask player again for their move.
+    
+        columnIndex = int(response) - 1 # -1 for 0-based the index.
+
+        # If the column is full, ask for a move again:
+        if board[(columnIndex, 0)] != EMPTY_SPACE:
+            print('That column is full, select another one.')
+            continue # Ask player again for their move.
+
+        # Starting from the bottom, find the first empty space.
+        for rowIndex in range(BOARD_HEIGHT - 1, -1, -1):
+            if board[(columnIndex, rowIndex)] == EMPTY_SPACE:
+                return (columnIndex, rowIndex)
+
+
