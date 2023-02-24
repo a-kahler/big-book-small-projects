@@ -171,4 +171,11 @@ def askForPlayerGuess(words, tries):
             return guess
         print('That is not one of the possible passwords listed above.')
         print('Try entering "{}" or "{}".'.format(words[0], words[1]))
-        
+
+
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
