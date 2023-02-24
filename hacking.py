@@ -162,3 +162,13 @@ def getComputerMemoryString(words):
     return '\n'.join(computerMemory)
 
 
+def askForPlayerGuess(words, tries):
+    """Let the player enter a password guess."""
+    while True:
+        print('Enter password: ({} tries remaining)'.format(tries))
+        guess = input('> ').upper()
+        if guess in words:
+            return guess
+        print('That is not one of the possible passwords listed above.')
+        print('Try entering "{}" or "{}".'.format(words[0], words[1]))
+        
