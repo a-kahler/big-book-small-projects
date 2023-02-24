@@ -114,3 +114,51 @@ def numMatchingLetters(word1, word2):
     return matches
 
 
+def getComputerMemoryString(words):
+    """Return a string representing the "computer memory"."""
+
+    # Pick one line per word to contain a word. There are 16 lines, but
+    # they are split into two halves.
+    linesWithWords = random.sample(range(16 * 2), len(words))
+    # The starting memory address (this is also cosmetic).
+    memoryAddress = 16 * random.randint(0, 4000)
+
+    # Create the "computer memory" string.
+    computerMemory = [] # Will contain 16 strings, one for each line.
+    nextWord = 0 # The index in words of the word to put into a line.
+    for lineNum in range(16): # The "computer memory" has 16 lines.
+        # Create a half line of garbage characters:
+        leftHalf = ''
+        rightHalf = ''
+        for j in range(16): # Each half line has 16 characters.
+            leftHalf += random.choice(GARBAGE_CHARS)
+            rightHalf += random.choice(GARBAGE_CHARS)
+
+        # Fill in the password from words:
+        if lineNum in linesWithWords:
+            # Find a random place in the half line to insert the word:
+            insertionIndex = random.randint(0, 9)
+            # Insert the word:
+            leftHalf = (leftHalf[:insertionIndex] + words[nextWord]
+                + leftHalf[insertionIndex + 7:])
+            nextWord += 1 # Update the word to put in the half line.
+        if lineNum + 16 in linesWithWords:
+            # Find a random place in the half line to insert the word:
+            insertionIndex = random.randint(0, 9)
+            # Insert the word:
+            rightHalf = (rightHalf[:insertionIndex] + words[nextWord]
+                + rightHalf[insertionIndex + 7:])
+            nextWord += 1 # Update the word to put in the half line.
+
+        computerMemory.append('0x' + hex(memoryAddress)[2:].zfill(4)
+                    + '  ' + leftHalf +  '    '
+                    + '0x' + hex(memoryAddress + (16*16))[2:].zfill(4)
+                    + '  ' + rightHalf)
+
+        memoryAddress += 16 # Jump from, say, 0xe680 to 0xe690
+
+    # Each string in the computerMemory list is joined into one large
+    # string to return:
+    return '\n'.join(computerMemory)
+
+
