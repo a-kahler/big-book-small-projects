@@ -103,4 +103,14 @@ def getOneWordExcept(blocklist=None):
         randomWord = random.choice(WORDS)
         if randomWord not in blocklist:
             return randomWord
-            
+
+
+def numMatchingLetters(word1, word2):
+    """Returns the number of matching letters in these two words."""
+    matches = 0
+    for i in range(len(word1)):
+        if word1[i] == word2[i]:
+            matches += 1
+    return matches
+
+
