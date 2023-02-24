@@ -94,3 +94,13 @@ def getWords():
     return words
 
 
+def getOneWordExcept(blocklist=None):
+    """Returns a random word from WORDS that isn't in blocklist."""
+    if blocklist == None:
+        blocklist = []
+
+    while True:
+        randomWord = random.choice(WORDS)
+        if randomWord not in blocklist:
+            return randomWord
+            
