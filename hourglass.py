@@ -183,3 +183,9 @@ def runHourglassSimulation(allSand):
             break # Break out of the main simulation loop. 
 
 
+# If this program is run (instead of imported), run the game:
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit()
