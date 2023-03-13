@@ -117,3 +117,30 @@ def main():
                 break
 
 
+def drawHangman(missedLetters, correctLetters, secretWord):
+    """Draw the current state of the hangman, along with the missed and
+    correctly-guessed letters of the secret word."""
+    print(HANGMAN_PICS[len(missedLetters)])
+    print('The category is:', CATEGORY)
+    print()
+
+    # Show the incorrectly guessed letters:
+    print('Missed letters: ', end='')
+    for letter in missedLetters:
+        print(letter, end=' ')
+    if len(missedLetters) == 0:
+        print('No missed letters yet.')
+    print()
+
+    # Display the blanks for the secret word (one blank per letter):
+    blanks = ['_'] * len(secretWord)
+
+    # Replace blanks with correctly guessed letters:
+    for i in range(len(secretWord)):
+        if secretWord[i] in correctLetters:
+            blanks[i] = secretWord[i]
+    
+    # Show the secret word with spaces in between each letter:
+    print(' '.join(blanks))
+
+
