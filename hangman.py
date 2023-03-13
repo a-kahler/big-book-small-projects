@@ -144,3 +144,19 @@ def drawHangman(missedLetters, correctLetters, secretWord):
     print(' '.join(blanks))
 
 
+def getPlayerGuess(alreadyGuessed):
+    """Returns the letter the player entered. This function makes sure
+    the player entered a single letter they haven't guessed before."""
+    while True: # Keep asking until the player enters a valid letter.
+        print('Guess a letter.')
+        guess = input('> ').upper()
+        if len(guess) != 1:
+            print('Please enter a single letter.')
+        elif guess in alreadyGuessed:
+            print('You have already guessed that letter. Choose again.')
+        elif not guess.isalpha():
+            print('Please enter a letter')
+        else:
+            return guess
+        
+
