@@ -41,4 +41,11 @@ for i in range(8):
     HOURGLASS.add((35 - i, 5 + i)) # Add the top right slanted wall.
     HOURGLASS.add((25 - i, 13 + i)) # Add the bottom left slanted wall.
     HOURGLASS.add((29 + i, 13 + i)) # Add the bottom right slanted wall.
-    
+
+# Set up the initial sand at the top of the hourglass:
+INITIAL_SAND = set()
+for y in range(8):
+    for x in range(19 + y, 36 - y):
+        INITIAL_SAND.add((x, y + 4))
+
+
