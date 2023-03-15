@@ -108,3 +108,13 @@ def isEmpty(x, y, board, robots):
     return board[(x, y)] == EMPTY_SPACE and (x, y) not in robots
 
 
+def addRobots(board):
+    """Add NUM_ROBOTS number of robots to empty spaces on the board and 
+    return a list of these (x, y) spaces where robots are now located."""
+    robots = []
+    for i in range(NUM_ROBOTS):
+        x, y = getRandomEmptySpace(board, robots)
+        robots.append((x, y))
+    return robots
+
+
