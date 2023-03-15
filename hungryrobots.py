@@ -92,3 +92,13 @@ def getNewBoard():
     return board
 
 
+def getRandomEmptySpace(board, robots):
+    """Return a (x, y) integer tuple of an empty space on the board."""
+    while True:
+        randomX = random.randint(1, WIDTH - 2)
+        randomY = random.randint(1, HEIGHT - 2)
+        if isEmpty(randomX, randomY, board, robots):
+            break
+    return (randomX, randomY)
+
+
