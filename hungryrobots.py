@@ -102,3 +102,9 @@ def getRandomEmptySpace(board, robots):
     return (randomX, randomY)
 
 
+def isEmpty(x, y, board, robots):
+    """Return True if the (x, y) is empty on the board and there's also
+    no robot there."""
+    return board[(x, y)] == EMPTY_SPACE and (x, y) not in robots
+
+
