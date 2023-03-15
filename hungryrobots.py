@@ -118,3 +118,22 @@ def addRobots(board):
     return robots
 
 
+def displayBoard(board, robots, playerPosition):
+    """Display the board, robots, and player on the screen."""
+    # Loop over every space on the board:
+    for y in range(HEIGHT):
+        for x in range(WIDTH):
+            # Draw the appropriate character:
+            if board[(x, y)] == WALL:
+                print(WALL, end='')
+            elif board[(x, y)] == DEAD_ROBOT:
+                print(DEAD_ROBOT, end='')
+            elif (x, y) == playerPosition:
+                print(PLAYER, end='')
+            elif (x, y) in robots:
+                print(ROBOT, end='')
+            else:
+                print(EMPTY_SPACE, end='')
+        print() # Print a newline.
+
+
