@@ -237,3 +237,6 @@ def moveRobots(board, robotPositions, playerPosition):
     return nextRobotPositions
 
 
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    main()
