@@ -29,3 +29,42 @@ assert len(ITEMS) == 9
 assert len(PLACES) == 9
 # First letters must be unique:
 assert len(PLACE_FIRST_LETTERS.keys()) == len(PLACES)
+
+
+knownSuspectsAndItems = []
+# visitedPlaces: Keys=places, values=strings of the suspect & item there.
+visitedPlaces = {}
+currentLocation = 'TAXI' # Start the game at the taxi.
+accusedSuspects = [] # Accused suspects won't offer clues.
+liars = random.sample(SUSPECTS, random.randint(3, 4))
+accusationsLeft = 3 # You can accuse up to 3 people. 
+culprit = random.choice(SUSPECTS)
+
+# Common indexes link these; e.g. SUSPECT[0] and ITEMS[0] are at PLACES[0].
+random.shuffle(SUSPECTS)
+random.shuffle(ITEMS)
+random.shuffle(PLACES)
+
+# Create data structures for clues the truth-tellers give about each
+# item and suspect.
+# clues: Keys=suspects being asked for a clue, value="clue dictionary".
+clues = {}
+for i, interviewee in enumerate(SUSPECTS):
+    if interviewee in liars:
+        continue # Skip the liars for now.
+    
+    # This "clue dictionary" has keys=items & suspects,
+    # value=the clue given.
+    clues[interviewee] = {}
+    clues[interviewee]['debug_liar'] = False # Useful for debugging.
+    for item in ITEMS: # Select clue about each item.
+        if random.randint(0, 1) == 0: # Tells where the item is:
+            clues[interviewee][item] = PLACES[ITEMS.index(item)]
+        else:
+            clues[interviewee][item] = SUSPECTS[ITEMS.index(item)]
+    for suspect in SUSPECTS: # Select clue about each suspect.
+        if random.randint(0, 1) == 0: # Tells where the suspect is:
+            clues[interviewee][suspect] = PLACES[SUSPECTS.index(suspect)]
+        else: # Tells what item the suspect has:
+            clues[interviewee][suspect] = ITEMS[SUSPECTS.index(suspect)]
+            
