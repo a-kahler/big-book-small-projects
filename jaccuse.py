@@ -147,3 +147,10 @@ for interviewee in random.sample(SUSPECTS, random.randint(3, 4)):
                     # Break out of the loop when wrong clue is selected.
                     break
             
+# EXPERIMENT: Uncomment this code to view the clue data structures:
+#import pprint
+#pprint.pprint(clues)
+#pprint.pprint(zophieClues)
+#print('culprit =', culprit)
+
+# START OF THE GAME
