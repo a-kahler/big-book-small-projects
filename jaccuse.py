@@ -108,3 +108,42 @@ for i, interviewee in enumerate(SUSPECTS):
                     # Break out of the loop when wrong clue is selected.
                     break
 
+# Create the data structures for clues given when asked about Zophie:
+zophieClues = {}
+for interviewee in random.sample(SUSPECTS, random.randint(3, 4)):
+    kindOfClue = random.randint(1, 3)
+    if kindOfClue == 1:
+        if interviewee not in liars:
+            # They tell you who has Zophie.
+            zophieClues[interviewee] = culprit
+        elif interviewee in liars:
+            while True:
+                # Select a (wrong) suspect clue.
+                zophieClues[interviewee] = random.choice(SUSPECTS)
+                if zophieClues[interviewee] != culprit:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+    
+    elif kindOfClue == 2:
+        if interviewee not in liars:
+            # They tell you where Zophie is.
+            zophieClues[interviewee] = PLACES[SUSPECTS.index(culprit)]
+        elif interviewee in liars:
+            while True:
+                # Select a (wrong) place clue.
+                zophieClues[interviewee] = random.choice(PLACES)
+                if zophieClues[interviewee] != PLACES[SUSPECTS.index(culprit)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+    elif kindOfClue == 3:
+        if interviewee not in liars:
+            # They tell you what item Zophie is near.
+            zophieClues[interviewee] = ITEMS[SUSPECTS.index(culprit)]
+        elif interviewee in liars:
+            while True:
+                # Select a (wrong) item clue.
+                zophieClues[interviewee] = random.choice(ITEMS)
+                if zophieClues[interviewee] != ITEMS[SUSPECTS.index(culprit)]:
+                    # Break out of the loop when wrong clue is selected.
+                    break
+            
