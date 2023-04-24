@@ -87,7 +87,7 @@ def main():
                 elif ant['direction'] == WEST:
                     ant['direction'] = NORTH
             else:
-                nextBoard[(ant['x'], any['y'])] = True
+                nextBoard[(ant['x'], ant['y'])] = True
                 # Turn counter clockwise:
                 if ant['direction'] == NORTH:
                     ant['direction'] = WEST
@@ -97,7 +97,7 @@ def main():
                     ant['direction'] = EAST
                 elif ant['direction'] == EAST:
                     ant['direction'] = NORTH
-            changedTiles.append((ant['x'], any['y']))
+            changedTiles.append((ant['x'], ant['y']))
 
             # Move the ant forward in whatever direction it's facing:
             if ant['direction'] == NORTH:
@@ -114,7 +114,7 @@ def main():
             ant['x'] = ant['x'] % WIDTH
             ant['y'] = ant['y'] % HEIGHT
 
-            changedTiles.append((ant['x'], any['y']))
+            changedTiles.append((ant['x'], ant['y']))
 
         board = nextBoard
 
@@ -157,3 +157,10 @@ def displayBoard(board, ants, changedTiles):
     time.sleep(PAUSE_AMOUNT)
 
 
+# If this program was run (instead of imported), run the game:
+if __name__ == '__main__':
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("Langton's Ant, by Austii KAY")
+        sys.exit() # When Ctrl-C is pressed, end the program.
